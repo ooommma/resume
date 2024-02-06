@@ -36,7 +36,7 @@ router.post("/sign-up", async (req, res, next) => {
 });
 
 // process.env.pood
-
+//로그인 api
 router.post("/sign-in", async (req, res, next) => {
   const { email, password } = req.body;
   const user = await prisma.users.findFirst({ where: { email } });
@@ -58,5 +58,16 @@ router.post("/sign-in", async (req, res, next) => {
   //리프레쉬 토큰 생성 반환
   return res.status(200).json({ message: "로그인에 성공하였습니다." });
 });
+
+
+// 내 정보 조회 api
+router.get('/me', authMiddleware, (req, res) => {
+  const user = req.body;
+  return res.json({
+      email: user.email,
+      name: user.name,
+      message: '회원 조회가 확인되었습니다.'
+  })
+})
 
 export default router;
