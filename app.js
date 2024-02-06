@@ -1,6 +1,6 @@
 // app.js
 
-import express from "express";
+import express from "express"; //express 많은 걸 도와주는 놈, 내장 <<<
 import cookieParser from "cookie-parser";
 import UsersRouter from "./routers/users.router.js";
 import ErrorHandlingMiddleware from "./middlewares/error-handling.middleware.js";
