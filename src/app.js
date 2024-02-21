@@ -2,10 +2,10 @@
 
 import express from "express"; //express 많은 걸 도와주는 놈, 내장 <<<
 import cookieParser from "cookie-parser";
-import UsersRouter from "./routers/users.router.js";
-import ErrorHandlingMiddleware from "./middlewares/error-handling.middleware.js";
-import LogMiddleware from "./middlewares/log.middleware.js";
-import documentsRouter from "./routers/documents.router.js";
+import UsersRouter from "../routers/users.router.js";
+import ErrorHandlingMiddleware from "../middlewares/error-handling.middleware.js";
+import LogMiddleware from "../middlewares/log.middleware.js";
+import documentsRouter from "../routers/resume.router.js";
 
 const app = express();
 const PORT = 3018;

@@ -1,14 +1,39 @@
 import express from "express";
 import { prisma } from "../models/index.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
+import ResumeController from "../src/controllers/resume.controller.js";
 
 const router = express.Router();
 
+// 생성
+// 조회
+// 상세조회
+// 수정
+// 삭제
+
+// PostsController의 인스턴스를 생성합니다.
+const resumeController = new ResumeController();
+
+/** 게시글 조회 API **/
+router.get("/", resumeController.getPosts);
+
+/** 게시글 상세 조회 API **/
+router.get("/:postId", resumeController.getPostById);
+
+/** 게시글 작성 API **/
+router.post("/", resumeController.createPost);
+
+/** 게시글 수정 API **/
+router.put("/:postId", resumeController.updatePost);
+
+/** 게시글 삭제 API **/
+router.delete("/:postId", resumeController.deletePost);
+
 // 이력서 생성 API
 router.post("/resume", authMiddleware, async (req, res, next) => {
-  const { userId } = req.user; 
+  const { userId } = req.user;
   const { title, content, status = "APPLY" } = req.body;
-  
+
   const Statuses = ["APPLY", "DROP", "PASS", "INTERVIEW1", "INTERVIEW2", "FINAL_PASS"];
   if (!Statuses.includes(status)) {
     return res.status(409).json({
@@ -18,7 +43,7 @@ router.post("/resume", authMiddleware, async (req, res, next) => {
   const resume = await prisma.resume.create({
     data: {
       userId: +userId, //
-      title, 
+      title,
       content,
       status
     }
